@@ -79,7 +79,7 @@ const CodingCompetitions = () => {
             Facebook hackecup, TCS Ninja, Uber Hacktag, Hacktoberfest,
             Girlscript, GSOC, Code jam, Hash Cup.
           </p>
-          <Filters> 
+          <Filters>
             <div className="filter selected">All</div>
             <div className="filter">DSA competiions</div>
             <div className="filter">Competative Coding</div>
@@ -115,7 +115,11 @@ const CodingCompetitions = () => {
               <>
                 {list
                   .filter(
-                    (item) => TimeLeft(item.registration_end_date) !== 'Expired'
+                    (item) =>
+                      TimeLeft(
+                        item.competition_date,
+                        item.time_start_mins + item.duration_mins
+                      ) !== 'Expired'
                   )
                   .map((item, index) => (
                     <div className="row" key={index}>
@@ -133,7 +137,12 @@ const CodingCompetitions = () => {
                           {returnMins(item.time_start_mins)}
                         </div>
                         <div className="time-left">
-                          {<IntervalTimeLeft date={item.competition_date} />}
+                          {
+                            <IntervalTimeLeft
+                              date={item.competition_date}
+                              minutes={item.time_start_mins}
+                            />
+                          }
                         </div>
                       </div>
                       <div className="duration">3 hrs</div>
@@ -143,12 +152,16 @@ const CodingCompetitions = () => {
                         <div className="time-left">
                           {item.registration_status === 'Open' ? (
                             (
-                              <IntervalTimeLeft date={item.registration_date} />
+                              <IntervalTimeLeft
+                                date={item.registration_end_date}
+                                minutes={item.registration_end_time_mins}
+                              />
                             ) === 'Expired' ? (
                               <>{(item.registration_status = 'Closed')}</>
                             ) : (
                               <IntervalTimeLeft
                                 date={item.registration_end_date}
+                                minutes={item.registration_end_time_mins}
                               />
                             )
                           ) : (

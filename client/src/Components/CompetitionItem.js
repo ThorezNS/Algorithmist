@@ -1,6 +1,6 @@
-import React from 'react';
-import IntervalTimeLeft from '../helpers/IntervalTimeLeft';
-import TimeLeft from '../helpers/TimeLeft';
+import React from "react";
+import IntervalTimeLeft from "../helpers/IntervalTimeLeft";
+import TimeLeft from "../helpers/TimeLeft";
 
 export default function CompetitionItem({ item, index }) {
   const returnHours = (e) => {
@@ -17,9 +17,9 @@ export default function CompetitionItem({ item, index }) {
         TimeLeft(
           item.registration_end_date,
           item.registration_end_time_mins
-        ) === 'Expired'
-          ? 'row ' + 'ongoing'
-          : 'row '
+        ) === "Expired"
+          ? "row " + "ongoing"
+          : "row "
       }
       key={index}
     >
@@ -49,20 +49,11 @@ export default function CompetitionItem({ item, index }) {
       <div className="registration">
         <div className="status">{item.registration_status}</div>
         <div className="time-left">
-          {item.registration_status === 'Open' ? (
-            (
-              <IntervalTimeLeft
-                date={item.registration_end_date}
-                minutes={item.registration_end_time_mins}
-              />
-            ) === 'Expired' ? (
-              <>{(item.registration_status = 'Closed')}</>
-            ) : (
-              <IntervalTimeLeft
-                date={item.registration_end_date}
-                minutes={item.registration_end_time_mins}
-              />
-            )
+          {item.registration_status === "Open" ? (
+            <IntervalTimeLeft
+              date={item.registration_end_date}
+              minutes={item.registration_end_time_mins}
+            />
           ) : (
             <>Registration Closed</>
           )}
